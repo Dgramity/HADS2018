@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Data.OleDb
 
 Public Class accesodatosSQL
     Private Shared conexion As New SqlConnection
@@ -7,12 +6,12 @@ Public Class accesodatosSQL
 
     Public Shared Function conectar() As String
         Try
-            conexion.ConnectionString = "Server=tcp:hads-11.database.windows.net,1433;Initial Catalog=hads-11;Persist Security Info=False;User ID=hads_2018_dais;Password=******;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+            conexion.ConnectionString = "Server=tcp:hads-11.database.windows.net,1433;Initial Catalog=hads-11;Persist Security Info=False;User ID=hads_2018_dais;Password=asdFGH12;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
             conexion.Open()
         Catch ex As Exception
             Return "ERROR DE CONEXIÓN: " + ex.Message
         End Try
-        Return "CONEXION OK"
+        Return conexion.ConnectionString
     End Function
 
     Public Shared Sub cerrarconexion()
@@ -31,7 +30,6 @@ Public Class accesodatosSQL
         End Try
         Return True
     End Function
-
 
     Public Shared Function actualizarDatos(ByVal act As String) As Boolean
         Dim st1 = act
@@ -62,22 +60,12 @@ Public Class accesodatosSQL
 
     End Function
 
-    Public Shared Function estaConfirmado(ByVal correo As String) As String
-        Dim num As SqlDataReader
+    Public Shared Function estaConfirmado(ByVal correo As String) As SqlDataReader
+
         Dim st = "Select * From Usuarios Where email='" & correo & "' AND confirmado=1"
         comando = New SqlCommand(st, conexion)
 
-        Try
-            num = comando.ExecuteReader()
-        Catch ex As Exception
-            Return ex.Message
-        End Try
-
-        If (num.HasRows) Then
-            Return "OK"
-        Else
-            Return "FALLO"
-        End If
+        Return comando.ExecuteReader()
 
     End Function
 
@@ -109,20 +97,6 @@ Public Class accesodatosSQL
             Return False
         End If
 
-    End Function
-
-    Public Shared Function tipoUsuario(ByVal email As String) As String
-        Dim reader As SqlDataReader
-        Dim st = "select tipo from Usuarios where email='" & email & "'"
-
-        comando = New SqlCommand(st, conexion)
-        reader = comando.ExecuteReader()
-
-        If reader.Read Then
-            Return reader("tipo")
-        Else
-            Return False
-        End If
 
     End Function
 
@@ -132,6 +106,31 @@ Public Class accesodatosSQL
         comando = New SqlCommand(st, conexion)
         Return comando.ExecuteReader()
 
+    End Function
+
+    Public Shared Function ObtenerAsignaturas(email As String) As SqlDataReader
+        Dim st = "select codigoasig from EstudiantesGrupo inner join GruposClase on EstudiantesGrupo.Grupo = GruposClase.codigo where Email='" & email & "'"
+
+        comando = New SqlCommand(st, conexion)
+        Return comando.ExecuteReader()
+    End Function
+
+    Public Shared Function ObtenerTareas(email As String, asignatura As String) As SqlDataAdapter
+        Dim da As SqlDataAdapter
+        Dim st = "select * from TareasGenericas where codasig = '" & asignatura & "' and explotacion = 1 and codigo not in (select CodTarea from EstudiantesTareas where Email='" & email & "')"
+
+
+        comando = New SqlCommand(st, conexion)
+        da = New SqlDataAdapter(comando)
+        Return da
+    End Function
+
+    Public Shared Function ObtenerInstanciadas(email As String) As SqlDataAdapter
+        Dim da As SqlDataAdapter
+        Dim st = "select * from EstudiantesTareas where Email='" & email & "'"
+        comando = New SqlCommand(st, conexion)
+        da = New SqlDataAdapter(comando)
+        Return da
     End Function
 
 End Class

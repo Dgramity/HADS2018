@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="aplicacion.aspx.vb" Inherits="WebApplication7.aplicacion" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="aplicacion.aspx.vb" Inherits="Lab2HADS25.aplicacion" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            Pagina Tras Inicio
+            <p> ESTO SERÍA LA APLICACIÓN UNA VEZ INICIADA LA SESIÓN</p>
         </div>
     </form>
 </body>
