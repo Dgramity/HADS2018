@@ -125,10 +125,37 @@ Public Class accesodatosSQL
         Return da
     End Function
 
+    Public Shared Function TareasAsi(ByVal asignatura As String) As SqlDataAdapter
+
+        Dim h As SqlDataAdapter
+        Dim st = "Select * From TareasGenericas Where CodAsig='" & asignatura & "'"
+
+        comando = New SqlCommand(st, conexion)
+
+        h = New SqlDataAdapter(comando)
+
+        Return h
+    End Function
+
     Public Shared Function ObtenerInstanciadas(email As String) As SqlDataAdapter
-        Dim da As SqlDataAdapter
+
         Dim st = "select * from EstudiantesTareas where Email='" & email & "'"
         comando = New SqlCommand(st, conexion)
+        Dim da As SqlDataAdapter
+        da = New SqlDataAdapter(comando)
+        Return da
+    End Function
+
+    Public Shared Function AsignaturasProfesor(ByVal correo As String) As SqlDataReader
+        Dim st = " Select P.codigoasig FROM GruposClase  P  inner join  ProfesoresGrupo H  On P.codigo = H.codigogrupo WHERE (H.email ='" & correo & "')"
+        comando = New SqlCommand(st, conexion)
+        Return comando.ExecuteReader()
+    End Function
+    Public Shared Function TareasGenericas() As SqlDataAdapter
+
+        Dim st = "Select * From TareasGenericas"
+        comando = New SqlCommand(st, conexion)
+        Dim da As SqlDataAdapter
         da = New SqlDataAdapter(comando)
         Return da
     End Function
