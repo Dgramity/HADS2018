@@ -17,6 +17,8 @@ Public Class WebForm1
     End Sub
 
     Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim wrapper As New Simple3Des(TextBox2.Text)
+        Dim cipherText As String = wrapper.EncryptData(TextBox1.Text)
 
         Dim result As String
         Dim result2 As SqlDataReader
@@ -28,12 +30,23 @@ Public Class WebForm1
 
         If result Then
 
-            If result2.HasRows And result2.Item(5).ToString.Equals("Alumno") = 0 Then
+            If result2.HasRows And result2.Item(5).ToString.Equals("Alumno") = 0 And TextBox1.Text.Equals("vadillo@ehu.es") Then
+                Session("email") = TextBox1.Text
+                FormsAuthentication.SetAuthCookie("vadillo", True)
+                Response.Redirect("App_Profesor/profesor.aspx")
+            ElseIf result2.HasRows And result2.Item(5).ToString.Equals("Alumno") = 0 And TextBox1.Text.Equals("admin@ehu.es") Then
+                Session("email") = TextBox1.Text
+                FormsAuthentication.SetAuthCookie("admin", True)
+                Response.Redirect("App_Admin/.aspx")
+            ElseIf result2.HasRows And result2.Item(5).ToString.Equals("Alumno") = 0 Then
                 Session("UserID") = TextBox1.Text()
-                Response.Redirect("Profesor.aspx")
+                FormsAuthentication.SetAuthCookie("profesor", True)
+                Response.Redirect("App_Profesor/Profesor.aspx")
             ElseIf result2.HasRows And result2.Item(5).ToString.Equals("Profesor") = 0 Then
                 Session("UserID") = TextBox1.Text()
-                Response.Redirect("Alumno.aspx")
+                FormsAuthentication.SetAuthCookie("alumno", True)
+                Response.Redirect("App_Alumno/Alumno.aspx")
+
             Else
                 LabelError.Visible = True
                 LabelError.Text = "Error, cuenta no confirmada"

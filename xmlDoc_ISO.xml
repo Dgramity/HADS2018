@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Tareas xmlns:has="http://ji.ehu.es/has">
+  <tarea codigo="ISO-Lab">
+    <descripcion>Lab Lab</descripcion>
+    <horasestimadas>10</horasestimadas>
+    <explotacion>False</explotacion>
+    <tipotarea>Trabajo</tipotarea>
+  </tarea>
+  <tarea codigo="ISO-Lab1">
+    <descripcion>prueba</descripcion>
+    <horasestimadas>12</horasestimadas>
+    <explotacion>True</explotacion>
+    <tipotarea>Ejercicio</tipotarea>
+  </tarea>
+  <tarea codigo="ISO-Test1">
+    <descripcion>Test 4 de la asignatura</descripcion>
+    <horasestimadas>3</horasestimadas>
+    <explotacion>False</explotacion>
+    <tipotarea>Examen</tipotarea>
+  </tarea>
+  <tarea codigo="prueba3">
+    <descripcion>asd</descripcion>
+    <horasestimadas>1</horasestimadas>
+    <explotacion>
+    </explotacion>
+    <tipotarea>Trabajo</tipotarea>
+  </tarea>
+</Tareas>
