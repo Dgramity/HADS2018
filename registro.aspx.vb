@@ -20,7 +20,7 @@ Public Class WebForm2
         enlace = String.Concat("https://hads11.azurewebsites.net/confirmacion.aspx?mbr=", TextBox1.Text, "&numconf=", CStr(NumConf))
         Dim wrapper As New Simple3Des(TextBox4.Text)
         Dim cipherText As String = wrapper.EncryptData(TextBox1.Text)
-        result = insertar(TextBox1.Text, TextBox2.Text, TextBox3.Text, NumConf, 0, RadioButtonList1.Text, TextBox4.Text)
+        result = insertar(TextBox1.Text, TextBox2.Text, TextBox3.Text, NumConf, 0, RadioButtonList1.Text, cipherText)
         mail.enviarEmail(TextBox1.Text, enlace)
         Response.Redirect("inicio.aspx")
 

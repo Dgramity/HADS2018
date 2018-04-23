@@ -159,5 +159,9 @@ Public Class accesodatosSQL
         da = New SqlDataAdapter(comando)
         Return da
     End Function
-
+    Public Shared Function getDatos(ByVal instruccion As String) As SqlDataReader
+        Dim st = instruccion
+        comando = New SqlCommand(st, conexion)
+        Return (comando.ExecuteReader())
+    End Function
 End Class

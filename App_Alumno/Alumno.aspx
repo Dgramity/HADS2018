@@ -6,9 +6,11 @@
 <head runat="server">
     <title></title>
 </head>
-<body style="height: 395px">
+<body style="height: 224px">
     <form id="form1" runat="server">
          <div align="center" style="background-color: #C0C0C0; font-size: xx-large" >
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
                 <asp:Button ID="ButtonCerrar" runat="server" Text="Cerrar" />
                 <strong>ALUMNO<br />GESTIÓN WEB DE TAREAS-DEDICACIÓN</strong></div>
         <div style="font-size: xx-large; margin-left: 2px; height: 115px;" align="center">
@@ -17,6 +19,14 @@
 &nbsp;<asp:HyperLink ID="Tareas" runat="server" ForeColor="#3366FF" style="text-decoration: underline" NavigateUrl="TareasAlumno.aspx">Tareas genericas</asp:HyperLink>
             
         </div>
+         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+             <ContentTemplate>
+                 <asp:GridView ID="GridView1" runat="server">
+                 </asp:GridView>
+                 <asp:Timer ID="Timer1" runat="server" Interval="2000">
+                 </asp:Timer>
+             </ContentTemplate>
+         </asp:UpdatePanel>
          <br />
          <br />
          <br />

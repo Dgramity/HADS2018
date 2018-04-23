@@ -11,10 +11,14 @@
     <form id="form1" runat="server">
         <div style="background-color: #C0C0C0; height: 136px;">
             <h1 style="text-align: center">
-                PROFESOR</h1>
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+            </h1>
             <h1 style="text-align: center">GESTIÓN DE TAREAS GENÉRICAS</h1>
         </div>
         <div>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                   <ContentTemplate>
             <asp:Label ID="Label2" runat="server" Text="Seleccionar asignatura:"></asp:Label>
             <br />
             <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="codigoasig" DataValueField="codigoasig">
@@ -65,8 +69,10 @@
         </div>
 
         <br />
-        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="Profesor.aspx">Inicio</asp:HyperLink>
-
+      
+        </ContentTemplate>
+        </asp:UpdatePanel>
+              <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="Profesor.aspx">Inicio</asp:HyperLink>
     </form>
 </body>
 </html>
