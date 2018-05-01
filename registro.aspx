@@ -46,7 +46,8 @@
             <asp:ListItem>Profesor</asp:ListItem>
         </asp:RadioButtonList>
         <asp:Button ID="Button1" runat="server" Text="Registrar" Height="41px" Width="176px" />
-        &nbsp;<br />
+        &nbsp;<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        <br />
         <br />
         &nbsp;*Tras registrarse, se enviará un mensaje a esa dirección de correo para confirmar la cuenta.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />

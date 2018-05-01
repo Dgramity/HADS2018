@@ -15,15 +15,20 @@ Public Class WebForm2
         Dim NumConf As Integer
         Dim mail As New EnvioEmail()
         Dim enlace As String
-        Randomize()
-        NumConf = CLng(Rnd() * 9000000) + 1000000
-        enlace = String.Concat("https://hads11.azurewebsites.net/confirmacion.aspx?mbr=", TextBox1.Text, "&numconf=", CStr(NumConf))
-        Dim wrapper As New Simple3Des(TextBox4.Text)
-        Dim cipherText As String = wrapper.EncryptData(TextBox1.Text)
-        result = insertar(TextBox1.Text, TextBox2.Text, TextBox3.Text, NumConf, 0, RadioButtonList1.Text, cipherText)
-        mail.enviarEmail(TextBox1.Text, enlace)
-        Response.Redirect("inicio.aspx")
+        Dim m As New Matricula.Matriculas
+        If (m.comprobar(TextBox1.Text) = "SI") Then
 
+            Randomize()
+            NumConf = CLng(Rnd() * 9000000) + 1000000
+            enlace = String.Concat("https://hads11.azurewebsites.net/confirmacion.aspx?mbr=", TextBox1.Text, "&numconf=", CStr(NumConf))
+            Dim wrapper As New Simple3Des(TextBox4.Text)
+            Dim cipherText As String = wrapper.EncryptData(TextBox1.Text)
+            result = insertar(TextBox1.Text, TextBox2.Text, TextBox3.Text, NumConf, 0, RadioButtonList1.Text, cipherText)
+            mail.enviarEmail(TextBox1.Text, enlace)
+            Response.Redirect("inicio.aspx")
+        Else
+            Label1.Text = "No estas matriculado"
+        End If
     End Sub
 
     Private Sub registro_Unload(sender As Object, e As EventArgs) Handles Me.Unload
